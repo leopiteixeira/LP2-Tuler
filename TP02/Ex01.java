@@ -5,6 +5,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
+//Gabriel Coutinho dos Santos e Leonardo Pinto Teixeira
+
 class Aluno {
     private String nome;
     private String endereco;
