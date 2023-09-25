@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+//Leonardo Pinto Teixeira e Gabriel Coutinho
+
 public class Ex01 {
     private boolean reset = true;
     private boolean pontuado = false;
@@ -15,6 +17,8 @@ public class Ex01 {
         BorderLayout layout = new BorderLayout(10, 10);
         FlowLayout telaSup = new FlowLayout(FlowLayout.RIGHT);
         FlowLayout tecladoInf = new FlowLayout(FlowLayout.LEFT);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel painel = new JPanel(layout);
         JPanel painelSuperior = new JPanel(telaSup);
