@@ -2,6 +2,7 @@ package TP03;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.JComboBox;
 
 class Pessoa{
 
@@ -59,11 +60,11 @@ class Pessoa{
 
 }
 
-public class Ex02V1 {
+public class Ex02V2 {
 
     private Pessoa umaPessoa = new Pessoa();
 
-    public Ex02V1() {
+    public Ex02V2() {
 
         
 
@@ -80,9 +81,11 @@ public class Ex02V1 {
         painel.add(painelInferior, BorderLayout.SOUTH);
         frame.getContentPane().add(painel);
 
+        String[] c1 = {"f", "m"};
+
         TextField numero = new TextField(null);
         TextField nome = new TextField(null);
-        TextField sexo = new TextField(null);
+        JComboBox<String> sexo = new JComboBox<String>(c1);
         TextField idade = new TextField(null);
 
 
@@ -114,27 +117,25 @@ public class Ex02V1 {
                 nome.setText(null);
                 numero.setText(null);
                 idade.setText(null);
-                sexo.setText(null);
             }
         });
 
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                if(nome.getText().isEmpty() || sexo.getText().isEmpty() || idade.getText().isEmpty()){
+                if(nome.getText().isEmpty() || idade.getText().isEmpty()){
                     JOptionPane.showMessageDialog(frame, "Componentes obrigatorios faltando!!");
                 }
-                else if(sexo.getText().toLowerCase().toCharArray()[0] != 'f' && sexo.getText().toLowerCase().toCharArray()[0] != 'm'){
+                else if(sexo.getSelectedItem() != "f" && sexo.getSelectedItem() != "m"){
                     JOptionPane.showMessageDialog(frame, "Valor colocado como sexo diferente de 'm' e 'f'");
                 } 
-                else if(sexo.getText().length() > 1){
+                else if(sexo.getSelectedItem().toString().length() > 1){
                     JOptionPane.showMessageDialog(frame, "Valor colocado como sexo diferente de 'm' e 'f'");
                 }
                 else{
-                    umaPessoa = new Pessoa(nome.getText(), sexo.getText().toCharArray()[0], Integer.parseInt(idade.getText()));
+                    umaPessoa = new Pessoa(nome.getText(), sexo.getSelectedItem().toString().toCharArray()[0], Integer.parseInt(idade.getText()));
                     nome.setText(null);
                     idade.setText(null);
-                    sexo.setText(null);
                     numero.setText(null);
                 }
                 
@@ -144,7 +145,7 @@ public class Ex02V1 {
         mostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(frame, String.format("Nome: %s\nIdade: %d\nSexo: %s\nKp: %d", umaPessoa.getNome(), umaPessoa.getIdade(), umaPessoa.getSexo(), umaPessoa.getKp()));
+                JOptionPane.showMessageDialog(frame, String.format("Nome: %s\nIdade: %d\nSexo: %s\nKp: %d", umaPessoa.getNome(), umaPessoa.getIdade(), umaPessoa.getSexo(), Pessoa.getKp()));
             }
         });
 
@@ -154,11 +155,11 @@ public class Ex02V1 {
         painelInferior.add(sair);
 
         frame.setTitle("TP02");
-        frame.setSize(400, 180);
+        frame.setSize(400, 200);
         frame.setVisible(true);
 
     }
     public static void main(String[] args) {
-        Ex02V1 app = new Ex02V1();
+        Ex02V2 app = new Ex02V2();
     }
 }

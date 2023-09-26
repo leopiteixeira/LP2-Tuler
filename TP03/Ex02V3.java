@@ -59,11 +59,11 @@ class Pessoa{
 
 }
 
-public class Ex02V1 {
+public class Ex02V3 {
 
     private Pessoa umaPessoa = new Pessoa();
 
-    public Ex02V1() {
+    public Ex02V3() {
 
         
 
@@ -71,10 +71,23 @@ public class Ex02V1 {
         BorderLayout layout = new BorderLayout(10, 10);
         GridLayout conteudoSup = new GridLayout(4, 4, 10, 10);
         GridLayout conteudoInf = new GridLayout(1, 4, 10, 10);
+        GridLayout radioButton = new GridLayout(1, 2, 5, 5);
 
         JPanel painel = new JPanel(layout);
+        JPanel panRadio = new JPanel(radioButton);
         JPanel painelSuperior = new JPanel(conteudoSup);
         JPanel painelInferior = new JPanel(conteudoInf);
+
+        ButtonGroup sexo = new ButtonGroup();
+
+        JRadioButton radioMasc = new JRadioButton("M", false);
+        JRadioButton radioFem = new JRadioButton("F", false);
+
+        sexo.add(radioFem);
+        sexo.add(radioMasc);
+
+        panRadio.add(radioMasc);
+        panRadio.add(radioFem);
 
         painel.add(painelSuperior, BorderLayout.NORTH);
         painel.add(painelInferior, BorderLayout.SOUTH);
@@ -82,7 +95,6 @@ public class Ex02V1 {
 
         TextField numero = new TextField(null);
         TextField nome = new TextField(null);
-        TextField sexo = new TextField(null);
         TextField idade = new TextField(null);
 
 
@@ -92,7 +104,7 @@ public class Ex02V1 {
         painelSuperior.add(new JLabel("Nome:"));
         painelSuperior.add(nome);
         painelSuperior.add(new JLabel("Sexo:"));
-        painelSuperior.add(sexo);
+        painelSuperior.add(panRadio);
         painelSuperior.add(new JLabel("Idade:"));
         painelSuperior.add(idade);
 
@@ -114,27 +126,23 @@ public class Ex02V1 {
                 nome.setText(null);
                 numero.setText(null);
                 idade.setText(null);
-                sexo.setText(null);
             }
         });
 
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                if(nome.getText().isEmpty() || sexo.getText().isEmpty() || idade.getText().isEmpty()){
+                if(nome.getText().isEmpty() || idade.getText().isEmpty()){
                     JOptionPane.showMessageDialog(frame, "Componentes obrigatorios faltando!!");
                 }
-                else if(sexo.getText().toLowerCase().toCharArray()[0] != 'f' && sexo.getText().toLowerCase().toCharArray()[0] != 'm'){
-                    JOptionPane.showMessageDialog(frame, "Valor colocado como sexo diferente de 'm' e 'f'");
-                } 
-                else if(sexo.getText().length() > 1){
-                    JOptionPane.showMessageDialog(frame, "Valor colocado como sexo diferente de 'm' e 'f'");
-                }
                 else{
-                    umaPessoa = new Pessoa(nome.getText(), sexo.getText().toCharArray()[0], Integer.parseInt(idade.getText()));
+                    if(radioMasc.isSelected()){
+                        umaPessoa = new Pessoa(nome.getText(), 'm', Integer.parseInt(idade.getText()));
+                    }else{
+                        umaPessoa = new Pessoa(nome.getText(), 'f', Integer.parseInt(idade.getText()));
+                    }
                     nome.setText(null);
                     idade.setText(null);
-                    sexo.setText(null);
                     numero.setText(null);
                 }
                 
@@ -144,7 +152,7 @@ public class Ex02V1 {
         mostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(frame, String.format("Nome: %s\nIdade: %d\nSexo: %s\nKp: %d", umaPessoa.getNome(), umaPessoa.getIdade(), umaPessoa.getSexo(), umaPessoa.getKp()));
+                JOptionPane.showMessageDialog(frame, String.format("Nome: %s\nIdade: %d\nSexo: %s\nKp: %d", umaPessoa.getNome(), umaPessoa.getIdade(), umaPessoa.getSexo(), Pessoa.getKp()));
             }
         });
 
@@ -154,11 +162,11 @@ public class Ex02V1 {
         painelInferior.add(sair);
 
         frame.setTitle("TP02");
-        frame.setSize(400, 180);
+        frame.setSize(400, 200);
         frame.setVisible(true);
 
     }
     public static void main(String[] args) {
-        Ex02V1 app = new Ex02V1();
+        Ex02V3 app = new Ex02V3();
     }
 }
