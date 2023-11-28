@@ -144,7 +144,7 @@ public class Ex02V1 {
         mostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(frame, String.format("Nome: %s\nIdade: %d\nSexo: %s\nKp: %d", umaPessoa.getNome(), umaPessoa.getIdade(), umaPessoa.getSexo(), umaPessoa.getKp()));
+                JOptionPane.showMessageDialog(frame, String.format("Nome: %s\nIdade: %d\nSexo: %s\nKp: %d", umaPessoa.getNome(), umaPessoa.getIdade(), umaPessoa.getSexo(), Pessoa.getKp()));
             }
         });
 
